@@ -1,0 +1,19 @@
+doctrine:
+    dbal:
+        connections:
+            default:
+                name: 'default'
+                wrapper_class: App\Connection\DoctrineMultidatabaseConnection
+                url: '%env(resolve:DATABASE_URL)%'
+    orm:
+        default_entity_manager: default
+        entity_managers:
+            default:
+                connection: 'default'
+                mappings:
+                    Main:
+                        type: attribute
+                        is_bundle: false
+                        dir: '%kernel.project_dir%/src/Entity'
+                        prefix: 'App\Entity\'
+                        alias: Main

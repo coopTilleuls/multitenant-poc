@@ -1,0 +1,29 @@
+parameters:
+    level: 9
+    paths:
+        - bin/
+        - config/
+        - public/
+        - src/
+        - tests/
+    checkTooWideReturnTypesInProtectedAndPublicMethods: true
+    checkUninitializedProperties: true
+    checkImplicitMixed: true
+    checkBenevolentUnionTypes: true
+    reportAlwaysTrueInLastCondition: true
+    checkMissingOverrideMethodAttribute: true
+    exceptions:
+        check:
+            missingCheckedExceptionInThrows: true
+            tooWideThrowType: true
+    #doctrine:
+        #see https://github.com/phpstan/phpstan-doctrine/issues/297
+   #     objectManagerLoader: tests/object-manager.php
+   #     reportDynamicQueryBuilders: true
+
+# PHPAT
+#services:
+#    -
+#        class: Tests\Architecture\MyFirstTest
+#        tags:
+#            - phpat.test

@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Log in!{% endblock %}
+
+{% block body %}
+    <div>
+        <h2>Your informations</h2>
+        <p>{{ app.user.email }} {{ app.user.roles|join(', ') }}</p>
+
+        {% if is_granted('ROLE_CLIENT_ADMIN') %}
+            <h2>Create a child user</h2>
+            {{ form_errors(registrationForm) }}
+
+            {{ form_start(registrationForm) }}
+            {{ form_row(registrationForm.email) }}
+            {{ form_row(registrationForm.plainPassword, {
+                label: 'Password'
+            }) }}
+
+            <button type="submit" class="btn">Register</button>
+            {{ form_end(registrationForm) }}
+        {% endif %}
+    </div>
+{% endblock %}
