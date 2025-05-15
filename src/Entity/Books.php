@@ -1,14 +1,15 @@
 <?php
 
 namespace App\Entity;
-use App\Repository\NimbusRepository;
+
+use App\Repository\BooksRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\IdGenerator\UuidGenerator;
 use Symfony\Component\Uid\Uuid;
 
-#[ORM\Table(name: 'nimbus')]
-#[ORM\Entity(repositoryClass: NimbusRepository::class)]
-class Nimbus
+#[ORM\Table(name: 'books')]
+#[ORM\Entity(repositoryClass: BooksRepository::class)]
+class Books
 {
     #[ORM\Id]
     #[ORM\GeneratedValue(strategy: 'CUSTOM')]
@@ -18,9 +19,6 @@ class Nimbus
 
     #[ORM\Column(type: 'string', length: 180, unique: true)]
     public ?string $nom;
-
-    #[ORM\Column(options: ['default' => false])]
-    public bool $ia = false;
 
     #[ORM\ManyToOne(inversedBy: 'nimbuses')]
     public ?User $owner = null;

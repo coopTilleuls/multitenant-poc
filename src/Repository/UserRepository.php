@@ -37,4 +37,13 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         $this->getEntityManager()->persist($user);
         $this->getEntityManager()->flush();
     }
+
+    public function findOneByTenant(string $tenant): ?User
+    {
+        return $this->createQueryBuilder('u')
+            ->where('u.email LIKE :tenant')
+            ->setParameter('tenant', "%$tenant%")
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
 }

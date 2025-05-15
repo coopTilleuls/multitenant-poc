@@ -6,8 +6,6 @@ use App\Entity\User;
 use App\Exceptions\TenantUserDatabaseNotCreatedException;
 use App\Repository\UserRepository;
 use App\Services\MultiTenantDatabaseHandler;
-use BadMethodCallException;
-use Doctrine\DBAL\Exception;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
@@ -39,7 +37,7 @@ class CreateDatabaseCommand extends Command
     }
 
     /**
-     * @throws BadMethodCallException
+     * @throws \BadMethodCallException
      */
     #[\Override]
     protected function execute(InputInterface $input, OutputInterface $output): int
@@ -57,7 +55,7 @@ class CreateDatabaseCommand extends Command
 
         if ($this->tenancyHandler->createCredentialsForUser($user)) {
             try {
-                if($this->tenancyHandler->createForeignTablesForUser($user)) {
+                if ($this->tenancyHandler->createForeignTablesForUser($user)) {
                     return Command::SUCCESS;
                 }
             } catch (TenantUserDatabaseNotCreatedException $_) {

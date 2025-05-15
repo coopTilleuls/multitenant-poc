@@ -9,7 +9,7 @@ class DoctrineMultidatabaseConnection extends Connection
 {
     /**
      * @param array<string, string> $params
-     * @return bool
+     *
      * @throws Exception
      */
     public function changeDatabase(array $params): bool

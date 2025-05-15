@@ -3,7 +3,6 @@
 namespace App\Entity;
 
 use ApiPlatform\Metadata\ApiResource;
-use App\Attributes\AsMultiTenantEntity;
 use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -48,7 +47,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: Types::BOOLEAN, options: ['default' => false])]
     private bool $db_created = false;
 
-    #[ORM\OneToMany(targetEntity: Nimbus::class, mappedBy: 'owner')]
+    #[ORM\OneToMany(targetEntity: Books::class, mappedBy: 'owner')]
     private Collection $nimbuses;
 
     public function __construct()
@@ -181,14 +180,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     }
 
     /**
-     * @return Collection<int, Nimbus>
+     * @return Collection<int, Books>
      */
     public function getNimbuses(): Collection
     {
         return $this->nimbuses;
     }
 
-    public function addNimbus(Nimbus $nimbus): static
+    public function addNimbus(Books $nimbus): static
     {
         if (!$this->nimbuses->contains($nimbus)) {
             $this->nimbuses->add($nimbus);
@@ -198,7 +197,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function removeNimbus(Nimbus $nimbus): static
+    public function removeNimbus(Books $nimbus): static
     {
         if ($this->nimbuses->removeElement($nimbus)) {
             // set the owning side to null (unless already changed)
